@@ -3,5 +3,5 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(Problem1())
+	fmt.Println(Task10(2000000))
 }
