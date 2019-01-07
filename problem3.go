@@ -1,37 +1,25 @@
 package main
 
 import (
-	"fmt"
 	"math"
 )
 
 func Problem3(lim int) []int {
-	//lim := 600851475143
-	var primes []int
-	for i := 2; i <= lim; i++ {
-		if IsPrime(i) {
-			primes = append(primes, i)
-		}
-	}
-	fmt.Println("Number of primes:", len(primes))
 	var factors []int
-	count := 0
-	var percent float64
-	for _, num := range primes {
-		var perc = math.Floor((float64(count) / float64(len(primes))) * 100)
-		if perc != percent {
-			fmt.Println(perc, "%")
-			percent = perc
+	return task3(lim, factors)
+}
+
+func task3(lim int, factors []int) []int {
+	if IsPrime(lim) {
+		factors = append(factors, lim)
+		return factors
+	}
+	for i := 2; i <= int(math.Floor(float64(lim)/2)); i++ {
+		if lim%i == 0 && IsPrime(i) {
+			x := lim / i
+			factors = append(factors, i)
+			return task3(x, factors)
 		}
-		var rem = math.Mod(float64(lim), float64(num))
-		if rem == 0 {
-			div := lim / num
-			factors = append(factors, num)
-			if IsPrime(div) {
-				factors = append(factors, div)
-			}
-		}
-		count++
 	}
 	return factors
 }
@@ -43,4 +31,13 @@ func IsPrime(value int) bool {
 		}
 	}
 	return value > 1
+}
+
+func IsPrimeC(value int, c chan<- bool) {
+	for i := 2; i <= int(math.Floor(float64(value)/2)); i++ {
+		if value%i == 0 {
+			c <- false
+		}
+	}
+	c <- value > 1
 }

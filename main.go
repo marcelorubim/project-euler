@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	fmt.Println(Task10(2000000))
+	//arg, _ := strconv.Atoi(os.Args[1])
+	result := Task13()
+	fmt.Println(&result)
 }
