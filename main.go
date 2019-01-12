@@ -8,5 +8,5 @@ import (
 
 func main() {
 	arg, _ := strconv.Atoi(os.Args[1])
-	fmt.Println(Task17(arg))
+	fmt.Println(Task20(arg))
 }
